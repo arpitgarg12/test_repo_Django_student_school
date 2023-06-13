@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> School List </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url:"{% url 'school_list' %}",
+                method: 'GET',
+                success:function(response){
+                    var schools = response.schools;
+                    for (var i= 0; i < school.length; i++){
+                        var school= schools[i];
+                        $('#school-table').append('<tr><td>' + school.name + '</td><td>' + school.create_at +'</td><td>' + school.update_at + '</td><td><a href="school/update/' + school.id + '">Edit</a></td><td><a href="/school/delete/' + school + '"> Delete</a></td></tr>');
+                    }
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+
+    <h1> School List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th> Name </th>
+                <th> Create At </th>
+                <th> Update At </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr> 
+                <td> {{ school.name }} </td>
+                <td> {{ school.create_at }} </td>
+                <td> {{ school.update_at }} </td>
+            </tr>
+            
+        </tbody>
+    </table>
+    <a href="/school/create"> Create School </a>
+
+</body>
+</html>

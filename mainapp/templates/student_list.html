@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Student List </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url:"{% url 'student_list' %}",
+                method: 'GET',
+                success:function(response){
+                    var students = response.students;
+                    for (var i= 0; i < student.length; i++){
+                        var student= students[i];
+                        $('#student-table').append('<tr><td>' + student.name +'<tr><td>' + student.enrollment +'<tr><td>' + student.school + '</td><td>' + student.create_at +'</td><td>' + student.update_at + '</td><td><a href="student/update/' + student.id + '">Edit</a></td><td><a href="/student/delete/' + student + '"> Delete</a></td></tr>');
+                    }
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <h1> Student List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th> Name </th>
+                <th> Enrollment </th>
+                <th> School </th>
+                <th> Create At </th>
+                <th> Update At </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody id= 'student-table'>
+            
+        </tbody>
+    </table>
+    <a href="/student/create"> Create Student </a>
+</body>
+</html>
